@@ -1,1 +1,683 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+  <title>DecodeLabs | Responsive Frontend Interface</title>
+  <meta name="description" content="Industrial Training Kit - Mobile-first responsive layout with 2025 UI/UX compliance">
+  <!-- Google Fonts: Montserrat/Inter for headlines, Roboto for body (max 2 families, 3 weights) -->
+  <link href="https://fonts.googleapis.com/css2?family=Inter:opsz,wght@14..32,300;14..32,400;14..32,600;14..32,700&family=Roboto:wght@300;400;500;700&display=swap" rel="stylesheet">
+  <style>
+    /* ---------- CSS RESET & GLOBAL VARIABLES (Warm, Grounded Aesthetics) ---------- */
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
 
+    :root {
+      /* Mocha Mousse (Stability) – warm brown/beige base */
+      --mocha: #A67B5B;
+      --mocha-light: #D4BEA2;
+      --mocha-bg: #F8F4EF;
+      /* Ethereal Blue (Trust) */
+      --ethereal: #7C9EB2;
+      --ethereal-soft: #B9D0DF;
+      --ethereal-deep: #4A6F86;
+      /* Moonlit Grey (Refinement) */
+      --moonlit: #E9E6E0;
+      --moonlit-dark: #8F8B82;
+      --charcoal: #2C2A27;
+      /* Accents & functional */
+      --warm-white: #FDFCF9;
+      --shadow-sm: 0 8px 20px rgba(0,0,0,0.05), 0 2px 4px rgba(0,0,0,0.02);
+      --shadow-md: 0 12px 28px rgba(0,0,0,0.08);
+      --border-radius-card: 1.5rem;
+      --border-radius-element: 2rem;
+      --transition-default: all 0.25s ease;
+    }
+
+    body {
+      font-family: 'Roboto', sans-serif;
+      background-color: var(--mocha-bg);
+      color: var(--charcoal);
+      line-height: 1.5;
+      scroll-behavior: smooth;
+    }
+
+    /* Typography – clamp for fluid responsiveness */
+    h1, h2, h3, h4, .headline-font {
+      font-family: 'Inter', sans-serif;
+      font-weight: 600;
+      letter-spacing: -0.02em;
+      line-height: 1.2;
+    }
+
+    h1 {
+      font-size: clamp(2rem, 7vw, 3.5rem);
+      font-weight: 700;
+    }
+
+    h2 {
+      font-size: clamp(1.75rem, 5vw, 2.5rem);
+      margin-bottom: 1rem;
+      font-weight: 600;
+    }
+
+    h3 {
+      font-size: clamp(1.25rem, 4vw, 1.75rem);
+      font-weight: 600;
+    }
+
+    .subhead {
+      font-size: clamp(1rem, 3.5vw, 1.25rem);
+      font-family: 'Inter', sans-serif;
+      font-weight: 400;
+      color: var(--ethereal-deep);
+    }
+
+    /* Layout containers */
+    .container {
+      max-width: 1280px;
+      margin: 0 auto;
+      padding: 0 1.5rem;
+    }
+
+    /* ========== SEMANTIC HEADER / NAV ========== */
+    .site-header {
+      background: var(--warm-white);
+      box-shadow: var(--shadow-sm);
+      position: sticky;
+      top: 0;
+      z-index: 100;
+      backdrop-filter: blur(2px);
+      background-color: rgba(253, 252, 249, 0.92);
+      border-bottom: 1px solid var(--moonlit);
+    }
+
+    .navbar {
+      display: flex;
+      flex-wrap: wrap;
+      align-items: center;
+      justify-content: space-between;
+      padding: 1rem 0;
+      gap: 1rem;
+    }
+
+    .logo h1 {
+      font-size: 1.6rem;
+      font-weight: 700;
+      color: var(--mocha);
+      letter-spacing: -0.01em;
+    }
+
+    .logo span {
+      font-weight: 400;
+      font-size: 0.8rem;
+      color: var(--moonlit-dark);
+      display: block;
+    }
+
+    .nav-links {
+      display: flex;
+      gap: 2rem;
+      list-style: none;
+    }
+
+    .nav-links a {
+      text-decoration: none;
+      font-weight: 500;
+      color: var(--charcoal);
+      transition: var(--transition-default);
+      font-family: 'Inter', sans-serif;
+    }
+
+    .nav-links a:hover {
+      color: var(--mocha);
+    }
+
+    /* Mobile-first nav: at base, nav-links could wrap; but we keep inline for tablet+ */
+    @media (max-width: 640px) {
+      .navbar {
+        flex-direction: column;
+        text-align: center;
+      }
+      .nav-links {
+        gap: 1.2rem;
+        flex-wrap: wrap;
+        justify-content: center;
+      }
+    }
+
+    /* ========== MAIN ========== */
+    main {
+      overflow-x: hidden;
+    }
+
+    /* Hero section with warm grounding */
+    .hero {
+      padding: 3rem 0 4rem 0;
+      background: linear-gradient(145deg, var(--warm-white) 0%, var(--moonlit) 100%);
+      border-radius: 0 0 2rem 2rem;
+      margin-bottom: 2rem;
+    }
+
+    .hero-grid {
+      display: grid;
+      gap: 2rem;
+      align-items: center;
+      grid-template-columns: 1fr;
+    }
+
+    .hero-content .badge {
+      background-color: var(--ethereal-soft);
+      color: var(--ethereal-deep);
+      padding: 0.3rem 1rem;
+      border-radius: 2rem;
+      font-size: 0.85rem;
+      font-weight: 500;
+      display: inline-block;
+      margin-bottom: 1rem;
+      font-family: 'Inter', sans-serif;
+    }
+
+    .hero-content p {
+      font-size: 1.1rem;
+      margin: 1.5rem 0 2rem;
+      color: #3a3632;
+      max-width: 90%;
+    }
+
+    .btn-group {
+      display: flex;
+      gap: 1rem;
+      flex-wrap: wrap;
+    }
+
+    .btn {
+      padding: 0.8rem 1.8rem;
+      border-radius: 3rem;
+      text-decoration: none;
+      font-weight: 600;
+      font-family: 'Inter', sans-serif;
+      transition: var(--transition-default);
+      border: none;
+      cursor: pointer;
+      background: transparent;
+    }
+
+    .btn-primary {
+      background-color: var(--mocha);
+      color: white;
+      box-shadow: var(--shadow-sm);
+    }
+
+    .btn-primary:hover {
+      background-color: #8c5e42;
+      transform: translateY(-2px);
+    }
+
+    .btn-outline {
+      border: 1.5px solid var(--mocha);
+      color: var(--mocha);
+      background: white;
+    }
+
+    .btn-outline:hover {
+      background: var(--mocha);
+      color: white;
+    }
+
+    /* Pillars / Cards section: GRID + FLEX components */
+    .pillars-section {
+      padding: 4rem 0;
+    }
+
+    .section-intro {
+      text-align: center;
+      max-width: 780px;
+      margin: 0 auto 3rem auto;
+    }
+
+    .cards-grid {
+      display: grid;
+      gap: 2rem;
+      grid-template-columns: 1fr;
+    }
+
+    /* Card component – Flexbox micro layout */
+    .card {
+      background: var(--warm-white);
+      border-radius: var(--border-radius-card);
+      padding: 2rem 1.8rem;
+      box-shadow: var(--shadow-sm);
+      transition: var(--transition-default);
+      border: 1px solid var(--moonlit);
+      display: flex;
+      flex-direction: column;
+    }
+
+    .card:hover {
+      transform: translateY(-5px);
+      box-shadow: var(--shadow-md);
+    }
+
+    .card-icon {
+      font-size: 2.8rem;
+      margin-bottom: 1.2rem;
+    }
+
+    .card h3 {
+      margin-bottom: 0.75rem;
+    }
+
+    .card p {
+      color: #4e4a45;
+      margin-bottom: 1.5rem;
+      flex: 1;
+    }
+
+    .tech-tag {
+      display: inline-block;
+      background: var(--moonlit);
+      padding: 0.25rem 1rem;
+      border-radius: 1rem;
+      font-size: 0.75rem;
+      font-weight: 500;
+      width: fit-content;
+      font-family: monospace;
+    }
+
+    /* Toolkit row (flex showcase) */
+    .toolkit-showcase {
+      background: var(--ethereal-soft);
+      border-radius: 2rem;
+      padding: 2.5rem 1.5rem;
+      margin: 2rem 0;
+    }
+
+    .flex-tools {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: space-between;
+      gap: 2rem;
+      align-items: flex-start;
+    }
+
+    .tool-item {
+      flex: 1;
+      min-width: 180px;
+      text-align: center;
+      background: rgba(255,255,245,0.6);
+      padding: 1rem;
+      border-radius: 1.5rem;
+      backdrop-filter: blur(2px);
+    }
+
+    /* quote / standards section */
+    .standards-block {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 2rem;
+      background: var(--moonlit);
+      border-radius: 2rem;
+      padding: 2rem;
+      margin: 2.5rem 0;
+      justify-content: space-between;
+    }
+
+    .standard-item {
+      flex: 1;
+      background: white;
+      border-radius: 1.2rem;
+      padding: 1.2rem;
+      text-align: center;
+      box-shadow: var(--shadow-sm);
+    }
+
+    /* FOOTER */
+    .site-footer {
+      background-color: var(--charcoal);
+      color: #e0dbd3;
+      padding: 3rem 0 2rem;
+      margin-top: 3rem;
+      border-top-left-radius: 2rem;
+      border-top-right-radius: 2rem;
+    }
+
+    .footer-content {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: space-between;
+      gap: 2rem;
+    }
+
+    .footer-logo h3 {
+      color: var(--mocha-light);
+    }
+
+    .footer-contact p {
+      margin: 0.3rem 0;
+    }
+
+    .footer-contact a {
+      color: var(--ethereal-soft);
+      text-decoration: none;
+    }
+
+    .copyright {
+      text-align: center;
+      margin-top: 2rem;
+      padding-top: 1rem;
+      border-top: 1px solid rgba(255,255,240,0.2);
+      font-size: 0.85rem;
+    }
+
+    /* Dynamic JS interactive badge */
+    .interactive-demo {
+      background: white;
+      border-radius: 1.8rem;
+      padding: 1.8rem;
+      text-align: center;
+      margin: 2rem 0;
+      box-shadow: var(--shadow-sm);
+      border: 1px solid var(--moonlit);
+    }
+
+    #clickCounterBtn {
+      background: var(--ethereal);
+      border: none;
+      padding: 0.8rem 1.8rem;
+      font-weight: bold;
+      border-radius: 3rem;
+      cursor: pointer;
+      color: white;
+      font-family: 'Inter', sans-serif;
+      transition: 0.2s;
+    }
+
+    #clickCounterBtn:hover {
+      background: var(--ethereal-deep);
+      transform: scale(1.02);
+    }
+
+    /* Tablet + Desktop media queries (min-width) */
+    @media (min-width: 768px) {
+      .hero-grid {
+        grid-template-columns: 1fr 1fr;
+      }
+      .cards-grid {
+        grid-template-columns: repeat(2, 1fr);
+      }
+      .container {
+        padding: 0 2rem;
+      }
+    }
+
+    @media (min-width: 1024px) {
+      .cards-grid {
+        grid-template-columns: repeat(3, 1fr);
+      }
+      .hero {
+        padding: 4rem 0 5rem;
+      }
+    }
+
+    /* WCAG-friendly: focus visible outlines */
+    a:focus-visible, button:focus-visible {
+      outline: 3px solid var(--mocha);
+      outline-offset: 2px;
+    }
+
+    img {
+      max-width: 100%;
+      height: auto;
+      display: block;
+    }
+
+    /* fluid typography using clamp */
+    p, li {
+      font-size: clamp(0.95rem, 3vw, 1.05rem);
+    }
+  </style>
+</head>
+<body>
+
+<header class="site-header">
+  <div class="container">
+    <div class="navbar">
+      <div class="logo">
+        <h1>Decode<span>Labs</span></h1>
+        <span>Industrial Training Kit</span>
+      </div>
+      <nav aria-label="Main navigation">
+        <ul class="nav-links">
+          <li><a href="#philosophy">Philosophy</a></li>
+          <li><a href="#pillars">Pillars</a></li>
+          <li><a href="#toolkit">Toolkit</a></li>
+          <li><a href="#interactive">Playground</a></li>
+        </ul>
+      </nav>
+    </div>
+  </div>
+</header>
+
+<main>
+  <!-- Hero section with mobile-first responsive layout -->
+  <section class="hero">
+    <div class="container">
+      <div class="hero-grid">
+        <div class="hero-content">
+          <div class="badge">✦ Project 1 · Responsive Frontend ✦</div>
+          <h1>Architecting for the<br>Mobile‑First Web</h1>
+          <p>Semantic integrity · 2025 UI/UX Compliance · Universal access. Warm, grounded aesthetics with strict WCAG adherence. Build digital experiences that adapt to every screen.</p>
+          <div class="btn-group">
+            <a href="#pillars" class="btn btn-primary">Explore Framework</a>
+            <button id="demoAlertBtn" class="btn btn-outline">✨ Interactive Logic</button>
+          </div>
+        </div>
+        <div class="hero-visual" aria-label="abstract design representation">
+          <svg viewBox="0 0 300 200" xmlns="http://www.w3.org/2000/svg" style="width:100%; height:auto;">
+            <rect width="100%" height="100%" fill="#F2F0EA" rx="20" />
+            <circle cx="80" cy="80" r="35" fill="#A67B5B" opacity="0.7" />
+            <circle cx="200" cy="120" r="45" fill="#7C9EB2" opacity="0.6" />
+            <path d="M50 150 L150 70 L230 150 Z" fill="#E9E6E0" stroke="#8F8B82" stroke-width="2" />
+            <text x="110" y="170" font-family="Inter" font-weight="bold" fill="#2C2A27" font-size="14">Responsive</text>
+          </svg>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Philosophy & standards: semantic landmarks -->
+  <div class="container" id="philosophy">
+    <div class="standards-block">
+      <div class="standard-item">
+        <h3>🌿 Semantic Integrity</h3>
+        <p>Code for AI, Accessibility & SEO. Using &lt;header&gt;, &lt;main&gt;, &lt;article&gt;, &lt;footer&gt; as blueprint.</p>
+      </div>
+      <div class="standard-item">
+        <h3>🎨 2025 UI/UX</h3>
+        <p>Mocha Mousse · Ethereal Blue · Moonlit Grey. Warm & grounded, shifting from sterile tech.</p>
+      </div>
+      <div class="standard-item">
+        <h3>♿ Universal Access</h3>
+        <p>WCAG 2.1 AA standards, contrast ratios, focus indicators, screen-reader friendly landmarks.</p>
+      </div>
+    </div>
+  </div>
+
+  <!-- Pillars Section (Grid + Flex components) -->
+  <section id="pillars" class="pillars-section">
+    <div class="container">
+      <div class="section-intro">
+        <h2>Pillars of Frontend Craft</h2>
+        <p class="subhead">Strategy · Visual Design · Implementation — The golden rules of resilient interfaces.</p>
+      </div>
+      <div class="cards-grid">
+        <article class="card">
+          <div class="card-icon">🧠</div>
+          <h3>Strategy & Blueprint</h3>
+          <p>Empathy maps, low-fidelity wireframes, grayscale-first testing. "If it doesn't work in grayscale, color won't fix it."</p>
+          <span class="tech-tag">Visily · Balsamiq · Paper</span>
+        </article>
+        <article class="card">
+          <div class="card-icon">🎨</div>
+          <h3>2025 Aesthetics</h3>
+          <p>Montserrat/Inter (headlines) + Roboto (body). Max 2 families, 3 weights. Mocha Mousse meets Ethereal Blue.</p>
+          <span class="tech-tag">Typography · Warm Palette</span>
+        </article>
+        <article class="card">
+          <div class="card-icon">🏗️</div>
+          <h3>Semantic HTML5</h3>
+          <p>Landmark elements: &lt;header&gt;, &lt;nav&gt;, &lt;main&gt;, &lt;article&gt;, &lt;footer&gt;. Build a table of contents for assistive tech.</p>
+          <span class="tech-tag">Accessibility · SEO</span>
+        </article>
+        <article class="card">
+          <div class="card-icon">📐</div>
+          <h3>CSS Grid + Flexbox</h3>
+          <p>Macro layouts with Grid, micro components with Flexbox. Mobile-first: single column → tablet → desktop.</p>
+          <span class="tech-tag">min-width: 768px / 1024px</span>
+        </article>
+        <article class="card">
+          <div class="card-icon">📱</div>
+          <h3>Fluid Typography</h3>
+          <p>clamp() for responsive type, container queries & relative units. Everything adapts seamlessly.</p>
+          <span class="tech-tag">clamp() · viewport units</span>
+        </article>
+        <article class="card">
+          <div class="card-icon">⚡</div>
+          <h3>JavaScript State</h3>
+          <p>Basic interactivity: counters, dynamic alerts, and lightweight DOM manipulation — no frameworks needed.</p>
+          <span class="tech-tag">ES6 · Event Handling</span>
+        </article>
+      </div>
+    </div>
+  </section>
+
+  <!-- Toolkit: Showcasing raw materials (HTML5/CSS3/JS) using flex -->
+  <div class="container" id="toolkit">
+    <div class="toolkit-showcase">
+      <h2 style="text-align:center; margin-bottom:1rem;">🛠️ The Toolkit · Raw Materials</h2>
+      <div class="flex-tools">
+        <div class="tool-item">
+          <span style="font-size:2.5rem;">🏗️</span>
+          <h3>HTML5</h3>
+          <p>Semantic landmarks, structural meaning — not just divs.</p>
+        </div>
+        <div class="tool-item">
+          <span style="font-size:2.5rem;">🎨</span>
+          <h3>CSS3</h3>
+          <p>Grid, Flexbox, Container Queries, clamp() — responsive skin.</p>
+        </div>
+        <div class="tool-item">
+          <span style="font-size:2.5rem;">⚙️</span>
+          <h3>JavaScript</h3>
+          <p>Basic state management & interactive functionality.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Interactive JavaScript Zone (state management demo) -->
+  <div class="container" id="interactive">
+    <div class="interactive-demo">
+      <h3>✨ JavaScript: Live Interaction ✨</h3>
+      <p>Track your engagement — prove your frontend logic skills. Each click below updates the counter state.</p>
+      <div style="display: flex; flex-wrap: wrap; gap: 2rem; justify-content: center; align-items: center; margin: 1.5rem 0;">
+        <button id="clickCounterBtn" aria-label="Increment interaction count">🤝 I’ve built a responsive mindset</button>
+        <div style="background: var(--moonlit); border-radius: 2rem; padding: 0.5rem 1.5rem;">
+          <span style="font-weight: bold;">Interaction score: </span>
+          <span id="counterDisplay" style="font-size: 1.8rem; font-weight: 800;">0</span>
+        </div>
+      </div>
+      <p class="subhead" style="margin-top:0;">💡 <strong>Mobile-first mentality:</strong> Button, layout, and counter all adapt across devices. Try resizing!</p>
+    </div>
+  </div>
+
+  <!-- Execution Roadmap - extra semantic message -->
+  <div class="container">
+    <div style="background: linear-gradient(120deg, #F2F0EA, #FAF7F0); border-radius: 2rem; padding: 2rem; margin: 2rem 0;">
+      <h3>📌 The Execution Roadmap</h3>
+      <p><strong>Mobile-First Strategy:</strong> Start single column → Media queries (min-width: 768px tablet, 1024px desktop) → Fluid grids and typography using clamp(). This very page demonstrates breakpoint-aware grid layouts: cards stack vertically on phone, 2 cols on tablet, 3 on desktop.</p>
+      <p><strong>Semantic Integrity check:</strong> Landmark elements used: <code>&lt;header&gt;, &lt;nav&gt;, &lt;main&gt;, &lt;section&gt;, &lt;article&gt;, &lt;footer&gt;</code>. All interactive controls accessible via keyboard.</p>
+    </div>
+  </div>
+</main>
+
+<footer class="site-footer">
+  <div class="container">
+    <div class="footer-content">
+      <div class="footer-logo">
+        <h3>DecodeLabs</h3>
+        <p>Industrial Training Kit · Batch 2026</p>
+        <p>Powered by Responsive Craft</p>
+      </div>
+      <div class="footer-contact">
+        <p>📞 +91 89330 06408</p>
+        <p>✉️ <a href="mailto:decodelabs.tech@gmail.com">decodelabs.tech@gmail.com</a></p>
+        <p>🌐 www.decodelabs.tech</p>
+        <p>📍 GREATER LUCKNOW, INDIA</p>
+      </div>
+    </div>
+    <div class="copyright">
+      <p>© 2026 DecodeLabs — Responsive Frontend Interface. WCAG compliant </p>
+    </div>
+  </div>
+</footer>
+
+<script>
+  // JavaScript: basic state management and interactive functionality
+  (function() {
+    // Counter state
+    let interactionCount = 0;
+    const counterSpan = document.getElementById('counterDisplay');
+    const counterBtn = document.getElementById('clickCounterBtn');
+    
+    function updateCounterUI() {
+      if (counterSpan) counterSpan.textContent = interactionCount;
+    }
+    
+    function handleInteraction() {
+      interactionCount++;
+      updateCounterUI();
+      // extra micro interaction: provide subtle feedback if count milestones
+      if (interactionCount === 5) {
+        const feedbackMsg = document.createElement('div');
+        feedbackMsg.textContent = "🎉 You're mastering responsive logic! Keep going.";
+        feedbackMsg.style.fontSize = "0.9rem";
+        feedbackMsg.style.marginTop = "12px";
+        feedbackMsg.style.color = "#A67B5B";
+        const parentDiv = document.querySelector('.interactive-demo');
+        let existingMsg = parentDiv.querySelector('.dynamic-feedback');
+        if(!existingMsg) {
+          const msgDiv = document.createElement('div');
+          msgDiv.className = 'dynamic-feedback';
+          msgDiv.textContent = "🎉 You're mastering responsive logic! Keep going.";
+          msgDiv.style.marginTop = "10px";
+          parentDiv.appendChild(msgDiv);
+          setTimeout(() => { msgDiv.style.opacity = "0"; setTimeout(()=>msgDiv.remove(), 800); }, 2000);
+          }
+      } else if (interactionCount === 10) {
+        alert("🌟 Amazing! You've proven your interactive state management. Ready for backend integration!");
+      }
+    }
+    
+    if (counterBtn) {
+      counterBtn.addEventListener('click', handleInteraction);
+    }
+    
+    // Demo alert button from hero section (additional interactive showcase)
+    const demoBtn = document.getElementById('demoAlertBtn');
+    if (demoBtn) {
+      demoBtn.addEventListener('click', () => {
+        alert("⚡ Frontend interface is alive! This kit follows Mobile-First paradigm, WCAG guidelines and 2025 warm aesthetics. Welcome to DecodeLabs.");
+      });
+    }
+    
+    // Extra console greeting
+    console.log("✅ DecodeLabs Project 1: Responsive Frontend Interface — semantic, grid+flex, mobile-first, JS state ready");
+  })();
+</script>
+</body>
+</html>
