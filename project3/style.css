@@ -1,0 +1,401 @@
+/* ─── RESET & BASE ─── */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Segoe UI', Roboto, system-ui, sans-serif;
+    background: #f4f7fc;
+    color: #1e293b;
+    padding-bottom: 3rem;
+}
+
+.container {
+    max-width: 1300px;
+    margin: 0 auto;
+    padding: 0 1.5rem;
+}
+
+/* ─── HEADER ─── */
+header {
+    background: linear-gradient(135deg, #0b1e33 0%, #1a3a5c 100%);
+    color: white;
+    padding: 1.5rem 0;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.15);
+    margin-bottom: 2rem;
+}
+
+.header-content {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 1rem;
+}
+
+header h1 {
+    font-weight: 600;
+    font-size: 1.8rem;
+    letter-spacing: -0.5px;
+}
+
+.badge {
+    background: rgba(255, 255, 255, 0.15);
+    backdrop-filter: blur(4px);
+    padding: 0.4rem 1.2rem;
+    border-radius: 40px;
+    font-size: 0.85rem;
+    font-weight: 500;
+    border: 1px solid rgba(255, 255, 255, 0.2);
+}
+
+/* ─── CARDS ─── */
+.card {
+    background: white;
+    border-radius: 16px;
+    box-shadow: 0 4px 24px rgba(0, 20, 40, 0.06);
+    padding: 1.5rem 1.8rem 2rem;
+    margin-bottom: 2.5rem;
+    border: 1px solid #e9edf4;
+    transition: box-shadow 0.2s;
+}
+
+.card:hover {
+    box-shadow: 0 8px 32px rgba(0, 20, 40, 0.10);
+}
+
+.card-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 1rem;
+    margin-bottom: 1.2rem;
+}
+
+.card-header h2 {
+    font-weight: 600;
+    font-size: 1.4rem;
+    color: #0b1e33;
+}
+
+/* ─── BUTTONS ─── */
+.btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.4rem;
+    padding: 0.55rem 1.4rem;
+    border: none;
+    border-radius: 40px;
+    font-weight: 600;
+    font-size: 0.9rem;
+    cursor: pointer;
+    transition: all 0.15s;
+    text-decoration: none;
+}
+
+.btn.primary {
+    background: #1a5a8c;
+    color: white;
+}
+.btn.primary:hover {
+    background: #0f4670;
+    transform: translateY(-1px);
+    box-shadow: 0 4px 12px rgba(26, 90, 140, 0.30);
+}
+
+.btn.secondary {
+    background: #e9edf4;
+    color: #1e293b;
+}
+.btn.secondary:hover {
+    background: #d5dce7;
+}
+
+.btn.danger {
+    background: #c2414a;
+    color: white;
+}
+.btn.danger:hover {
+    background: #a3323b;
+}
+
+.btn.success {
+    background: #1e7b4a;
+    color: white;
+}
+.btn.success:hover {
+    background: #14633a;
+}
+
+.btn.sm {
+    padding: 0.3rem 0.9rem;
+    font-size: 0.8rem;
+}
+
+/* ─── TABLE ─── */
+.table-wrapper {
+    overflow-x: auto;
+    border-radius: 12px;
+    border: 1px solid #eef2f7;
+}
+
+table {
+    width: 100%;
+    border-collapse: collapse;
+    font-size: 0.92rem;
+}
+
+thead {
+    background: #f8faff;
+}
+
+th {
+    text-align: left;
+    padding: 0.8rem 1rem;
+    font-weight: 600;
+    color: #334155;
+    border-bottom: 2px solid #e2e8f0;
+    white-space: nowrap;
+}
+
+td {
+    padding: 0.7rem 1rem;
+    border-bottom: 1px solid #edf2f7;
+    vertical-align: middle;
+}
+
+tr:last-child td {
+    border-bottom: none;
+}
+
+tr:hover td {
+    background: #fafcff;
+}
+
+.loading {
+    text-align: center;
+    color: #94a3b8;
+    padding: 2rem 0;
+    font-style: italic;
+}
+
+/* ─── STATUS BADGE ─── */
+.status-badge {
+    display: inline-block;
+    padding: 0.2rem 0.9rem;
+    border-radius: 40px;
+    font-size: 0.75rem;
+    font-weight: 600;
+    text-transform: capitalize;
+    background: #e9edf4;
+    color: #334155;
+}
+.status-badge.pending {
+    background: #fef3c7;
+    color: #92400e;
+}
+.status-badge.processing {
+    background: #dbeafe;
+    color: #1e40af;
+}
+.status-badge.shipped {
+    background: #d1fae5;
+    color: #065f46;
+}
+.status-badge.delivered {
+    background: #d1fae5;
+    color: #065f46;
+}
+.status-badge.cancelled {
+    background: #fee2e2;
+    color: #991b1b;
+}
+
+/* ─── ACTIONS ─── */
+.actions-cell {
+    display: flex;
+    gap: 0.4rem;
+    flex-wrap: wrap;
+}
+
+/* ─── MODAL ─── */
+.modal-overlay {
+    display: none;
+    position: fixed;
+    inset: 0;
+    background: rgba(11, 30, 51, 0.50);
+    backdrop-filter: blur(6px);
+    z-index: 1000;
+    align-items: center;
+    justify-content: center;
+    animation: fadeIn 0.2s ease;
+}
+
+.modal-overlay.active {
+    display: flex;
+}
+
+.modal {
+    background: white;
+    border-radius: 20px;
+    max-width: 520px;
+    width: 95%;
+    padding: 2rem;
+    box-shadow: 0 24px 80px rgba(0, 0, 0, 0.25);
+    animation: slideUp 0.25s ease;
+}
+
+.modal-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 1.5rem;
+}
+
+.modal-header h3 {
+    font-size: 1.3rem;
+    font-weight: 600;
+    color: #0b1e33;
+}
+
+.close-btn {
+    background: none;
+    border: none;
+    font-size: 2rem;
+    line-height: 1;
+    cursor: pointer;
+    color: #94a3b8;
+    padding: 0 0.2rem;
+}
+.close-btn:hover {
+    color: #1e293b;
+}
+
+/* ─── FORM ─── */
+.form-group {
+    margin-bottom: 1.2rem;
+}
+
+.form-group label {
+    display: block;
+    font-weight: 500;
+    font-size: 0.9rem;
+    color: #334155;
+    margin-bottom: 0.3rem;
+}
+
+.form-group input,
+.form-group select {
+    width: 100%;
+    padding: 0.65rem 1rem;
+    border: 1.5px solid #e2e8f0;
+    border-radius: 10px;
+    font-size: 0.95rem;
+    transition: border 0.15s;
+    background: #fafcff;
+}
+.form-group input:focus,
+.form-group select:focus {
+    outline: none;
+    border-color: #1a5a8c;
+    box-shadow: 0 0 0 3px rgba(26, 90, 140, 0.15);
+}
+
+.modal-actions {
+    display: flex;
+    justify-content: flex-end;
+    gap: 0.8rem;
+    margin-top: 1.8rem;
+    padding-top: 1rem;
+    border-top: 1px solid #edf2f7;
+}
+
+/* ─── TOAST ─── */
+#toastContainer {
+    position: fixed;
+    bottom: 2rem;
+    right: 2rem;
+    z-index: 2000;
+    display: flex;
+    flex-direction: column;
+    gap: 0.7rem;
+    max-width: 380px;
+    width: 100%;
+}
+
+.toast {
+    background: #1e293b;
+    color: white;
+    padding: 0.9rem 1.4rem;
+    border-radius: 12px;
+    font-size: 0.9rem;
+    font-weight: 500;
+    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.18);
+    animation: slideIn 0.3s ease;
+    display: flex;
+    align-items: center;
+    gap: 0.7rem;
+}
+.toast.success {
+    background: #14633a;
+}
+.toast.error {
+    background: #a3323b;
+}
+.toast.info {
+    background: #1a5a8c;
+}
+
+/* ─── ANIMATIONS ─── */
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+    }
+    to {
+        opacity: 1;
+    }
+}
+@keyframes slideUp {
+    from {
+        transform: translateY(30px);
+        opacity: 0;
+    }
+    to {
+        transform: translateY(0);
+        opacity: 1;
+    }
+}
+@keyframes slideIn {
+    from {
+        transform: translateX(40px);
+        opacity: 0;
+    }
+    to {
+        transform: translateX(0);
+        opacity: 1;
+    }
+}
+
+/* ─── RESPONSIVE ─── */
+@media (max-width: 700px) {
+    .card {
+        padding: 1rem;
+    }
+    .card-header {
+        flex-direction: column;
+        align-items: stretch;
+    }
+    .modal {
+        padding: 1.5rem;
+    }
+    header h1 {
+        font-size: 1.3rem;
+    }
+    .badge {
+        font-size: 0.7rem;
+        padding: 0.2rem 0.8rem;
+    }
+}

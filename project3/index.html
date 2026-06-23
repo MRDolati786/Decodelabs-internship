@@ -1,1 +1,94 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+    <title>Project 3 · Database Integration</title>
+    <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+    <header>
+        <div class="container header-content">
+            <h1>📦 Order Manager</h1>
+            <span class="badge">Project 3 · Database Integration</span>
+        </div>
+    </header>
 
+    <main class="container">
+        <!-- ====== CUSTOMER SECTION ====== -->
+        <section class="card">
+            <div class="card-header">
+                <h2>👤 Customers</h2>
+                <button class="btn primary" id="openCustomerModal">+ New Customer</button>
+            </div>
+            <div class="table-wrapper">
+                <table>
+                    <thead>
+                        <tr>
+                            <th>ID</th>
+                            <th>Name</th>
+                            <th>Email</th>
+                            <th>Phone</th>
+                            <th>Orders</th>
+                            <th>Actions</th>
+                        </tr>
+                    </thead>
+                    <tbody id="customerTableBody">
+                        <tr><td colspan="6" class="loading">Loading customers…</td></tr>
+                    </tbody>
+                </table>
+            </div>
+        </section>
+
+        <!-- ====== ORDER SECTION ====== -->
+        <section class="card">
+            <div class="card-header">
+                <h2>📋 Orders</h2>
+                <button class="btn primary" id="openOrderModal">+ New Order</button>
+            </div>
+            <div class="table-wrapper">
+                <table>
+                    <thead>
+                        <tr>
+                            <th>ID</th>
+                            <th>Product</th>
+                            <th>Qty</th>
+                            <th>Price</th>
+                            <th>Total</th>
+                            <th>Status</th>
+                            <th>Customer</th>
+                            <th>Actions</th>
+                        </tr>
+                    </thead>
+                    <tbody id="orderTableBody">
+                        <tr><td colspan="8" class="loading">Loading orders…</td></tr>
+                    </tbody>
+                </table>
+            </div>
+        </section>
+    </main>
+
+    <!-- ====== MODAL (shared for Customer & Order) ====== -->
+    <div class="modal-overlay" id="modalOverlay">
+        <div class="modal">
+            <div class="modal-header">
+                <h3 id="modalTitle">New Customer</h3>
+                <button class="close-btn" id="closeModal">&times;</button>
+            </div>
+            <form id="modalForm" autocomplete="off">
+                <!-- dynamic fields injected by JS -->
+                <div id="modalFields"></div>
+                <div class="modal-actions">
+                    <button type="button" class="btn secondary" id="cancelModal">Cancel</button>
+                    <button type="submit" class="btn primary" id="submitModal">Save</button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <!-- ====== TOAST NOTIFICATIONS ====== -->
+    <div id="toastContainer"></div>
+
+    <script src="script.js"></script>
+</body>
+</html>
